@@ -15,10 +15,9 @@ fun is_older (date1 : (int*int*int), date2 : (int*int*int)) =
         val d2 = #3 date2
     in
         y1 < y2 orelse
-        if y1 = y2
-        then m1 < m2 orelse
-             m1 = m2 andalso d1 < d2
-        else false
+        y1 = y2 andalso
+        (m1 < m2 orelse
+             (m1 = m2 andalso d1 < d2))
     end
 
 (* list of only the dates from given list that are in the given month
