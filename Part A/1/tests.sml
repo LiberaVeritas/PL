@@ -124,3 +124,14 @@ val tes5555 = dates_in_months_challenge ([(2012,2,28),(2013,12,1),(2011,3,31),(2
 
 val a = reasonable_date (0, 1, 1) = false
 val a1 = reasonable_date (4, 2, 29)
+
+
+val c = is_older ((1,2,25),(1,12,29)) = true
+
+val c1 = is_older ((1,2,25), (1,2,27)) = true
+
+val c2 = is_older ((5,4,4) , (4,5,4)) = false
+
+val d = oldest [(5,5,2),(5,10,2),(5,2,2),(5,12,2)] = SOME (5,2,2)
+
+val d1 = oldest [(5,12,15),(5,12,10),(5,12,1)] = SOME (5,12,1)
