@@ -1,4 +1,3 @@
-
 (* Homework 1 solutions *)
 
 (* date is (int*int*int), year month and day *)
@@ -7,11 +6,20 @@
 (* whether first date comes strictly before second
 : bool *)
 fun is_older (date1 : (int*int*int), date2 : (int*int*int)) =
-    if #1 date1 <= #1 date2
-    then #1 date1 < #1 date2
-    else if #2 date1 <= #2 date2    (* years must equal *)
-    then #2 date1 < #2 date2
-    else #3 date1 < #3 date2        (* months must equal *)
+    let 
+        val y1 = #1 date1
+        val y2 = #1 date2
+        val m1 = #2 date1
+        val m2 = #2 date2
+        val d1 = #3 date1
+        val d2 = #3 date2
+    in
+        y1 < y2 orelse
+        if y1 = y2
+        then m1 < m2 orelse
+             m1 = m2 andalso d1 < d2
+        else false
+    end
 
 (* list of only the dates from given list that are in the given month
 : (int*int*int) list *)
