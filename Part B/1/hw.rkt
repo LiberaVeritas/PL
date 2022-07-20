@@ -17,7 +17,7 @@
 
 ;; ith element where i is n mod length, else error
 (define (list-nth-mod xs n)
-  (cond [(< n 0) (list-nth-mod (list 1 2 3 4 5) 3)(error "list-nth-mod: negative number")]
+  (cond [(< n 0) (error "list-nth-mod: negative number")]
         [(null? xs) (error "list-nth-mod: empty list")]
         [#t
          (let* ([len (length xs)]
