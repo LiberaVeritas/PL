@@ -259,7 +259,7 @@
         [(call? e)
          (let* ([c (eval-under-env-c (compute-free-vars (call-funexp e)) env)]
                 [v (eval-under-env-c (compute-free-vars (call-actual e)) env)]
-                [f (compute-free-vars (closure-fun c))])
+                [f (compute-free-vars (closure-fun c))])   ;; mistake, check for closure before using closure-fun
            (if (not (closure? c))
                (error "MUPL call applied to non-function")
                (let* ([fun-env (closure-env c)]
