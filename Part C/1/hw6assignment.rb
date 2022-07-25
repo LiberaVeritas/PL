@@ -37,11 +37,11 @@ class MyBoard < Board
   def next_piece
     if cheat?
       @current_block = MyPiece.new([[[0, 0]]]), self)
+      @cheat = false
     else
       @current_block = MyPiece.next_piece(self)
     end
     @current_pos = nil
-    @cheat = false
   end
 
   # enhanced to work with pieces made with any number of blocks
