@@ -36,7 +36,7 @@ class MyBoard < Board
   # with cheat case
   def next_piece
     if cheat?
-      @current_block = MyPiece.new([[[0, 0]]]), self)
+      @current_block = MyPiece.new([[[0, 0]]], self)
       @cheat = false
     else
       @current_block = MyPiece.next_piece(self)
