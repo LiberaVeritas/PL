@@ -18,6 +18,8 @@ FOUR = 4.0
 FIVE = 5.0
 SIX = 6.0
 SEVEN = 7.0
+EIGHT = 8.0
+NINE = 9.0
 TEN = 10.0
 
 #Point Tests
@@ -42,6 +44,30 @@ end
 a3 = a.intersect(Point.new(FOUR,FIVE))
 if not (a3.is_a? NoPoints)
 	puts "Point intersect not working properly"
+end
+a4 = a.intersect(Line.new(FIVE/THREE, ZERO))
+if not (a4.x == THREE and a4.y == FIVE)
+	puts "Point intersect with line wrong"
+end
+a5 = a.intersect(Line.new(THREE, FIVE))
+if not (a5.is_a? NoPoints)
+	puts "Point intersect with line wrong"
+end
+a6 = a.intersect(VerticalLine.new(THREE))
+if not (a6.x == THREE and a6.y == FIVE)
+	puts "Point intersect vline wrong"
+end
+a7 = a.intersect(VerticalLine.new(TWO))
+if not (a7.is_a? NoPoints)
+	puts "Point intersect vline wrong"
+end
+a8 = a.intersect(LineSegment.new(ZERO, ZERO, SIX, TEN))
+if not (a8.x == THREE and a8.y == FIVE)
+	puts "Point intersect seg wrong"
+end
+a9 = a.intersect(LineSegment.new(ZERO, ZERO, TEN, THREE))
+if not (a9.is_a? NoPoints)
+	puts "Point intersect seg wrong"
 end
 
 #Line Tests
@@ -69,6 +95,36 @@ b3 = b.intersect(Line.new(THREE,FOUR))
 if not ((b3.is_a? NoPoints))
 	puts "Line intersect not working properly"
 end
+b4 = b.intersect(Point.new(ONE, EIGHT))
+if not (b4.x == ONE and b4.y == EIGHT)
+	puts "Line intersect not working properly"
+end
+b5 = b.intersect(Point.new(TWO, EIGHT))
+if not (b5.is_a? NoPoints)
+	puts "Line intersect not working properly"
+end
+b6 = b.intersect(VerticalLine.new(TWO))
+if not (b6.x == TWO and b6.y == 11.0)
+	puts "Line intersect not working properly"
+end
+b6 = b.intersect(LineSegment.new(ZERO, ZERO, ONE, ONE))
+if not (b6.is_a? NoPoints)
+	puts "Line intersect not working properly"
+end
+b6 = b.intersect(LineSegment.new(ZERO, ZERO, ONE, TEN))
+if not (b6.is_a? Point)
+	puts "Line intersect not working properly"
+	puts b6.x
+	puts b6.y
+end
+b6 = b.intersect(LineSegment.new(ZERO, FIVE, ONE, EIGHT))
+if not (b6.x1 == ZERO and b6.y1 == FIVE and b6.x2 == ONE and b6.y2 == EIGHT)
+	puts "Line intersect not working properly"
+	puts b6.x1
+	puts b6.y1
+	puts b6.y1
+	puts b6.y2
+end
 
 #VerticalLine Tests
 c = VerticalLine.new(THREE)
@@ -94,11 +150,32 @@ c3 = c.intersect(VerticalLine.new(FOUR))
 if not ((c3.is_a? NoPoints))
 	puts "VerticalLine intersect not working properly"
 end
+c3 = c.intersect(Line.new(ONE, ZERO))
+if not (c3.x == THREE and c3.y == THREE)
+	puts "VerticalLine intersect not working properly"
+end
+c3 = c.intersect(Point.new(ZERO, ZERO))
+if not (c3.is_a? NoPoints)
+	puts "VerticalLine intersect not working properly"
+end
+c3 = c.intersect(Point.new(THREE, ZERO))
+if not (c3.x == THREE and c3.y == ZERO)
+	puts "VerticalLine intersect not working properly"
+end
+
+c3 = c.intersect(LineSegment.new(ZERO, ZERO, FOUR, ZERO))
+if not (c3.x == THREE and c3.y == ZERO)
+	puts "VerticalLine intersect not working properly"
+end
+c3 = c.intersect(LineSegment.new(THREE, ZERO, THREE, FOUR))
+if not (c3.x1 == THREE and c3.y1 == ZERO and c3.x2 == THREE and c3.y2 == FOUR)
+	puts "VerticalLine intersect not working properly"
+end
 
 #LineSegment Tests
 d = LineSegment.new(ONE,TWO,-THREE,-FOUR)
 if not (d.eval_prog([]) == d)
-	puts "LineSegement eval_prog should return self"
+	puts "LineSegment eval_prog should return self"
 end
 d1 = LineSegment.new(ONE,TWO,ONE,TWO)
 d2 = d1.preprocess_prog
@@ -113,6 +190,12 @@ if not (d.x1 == -THREE and d.y1 == -FOUR and d.x2 == ONE and d.y2 == TWO)
 	puts "on the left of x2 and y2"
 end
 
+dt = LineSegment.new(ZERO, TWO, ZERO, ONE)
+dt = dt.preprocess_prog
+if not (dt.x1 == ZERO and dt.y1 == ONE and dt.x2 == ZERO and dt.y2 == TWO)
+	puts "LineSegment preprocess_prog should make y1 below y2"
+end
+
 d3 = d.shift(THREE,FIVE)
 if not (d3.x1 == ZERO and d3.y1 == ONE and d3.x2 == FOUR and d3.y2 == SEVEN)
 	puts "LineSegment shift not working properly"
@@ -125,6 +208,18 @@ end
 d5 = d.intersect(LineSegment.new(TWO,THREE,FOUR,FIVE))
 if not ((d5.is_a? NoPoints))
 	puts "LineSegment intersect not working properly"
+end
+
+dt1 = LineSegment.new(ONE, ONE, THREE, THREE)
+dt2 = LineSegment.new(ZERO, ZERO, TWO, TWO)
+d = dt1.intersect(dt2)
+if not (d.x1 == ONE and d.y1 == ONE and d.x2 == TWO and d.x2 == TWO)
+	puts "wrong"
+end
+
+d = dt2.intersect(LineSegment.new(ONE, ONE, FOUR, FOUR))
+if not (d.x1 == ONE and d.y1 == ONE and d.x2 == TWO and d.x2 == TWO)
+	puts "wrong"
 end
 
 #Intersect Tests
