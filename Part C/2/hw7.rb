@@ -161,13 +161,13 @@ class Point < GeometryValue
 
   def intersectWithSegmentAsLineResult seg
     if real_close(seg.x1, seg.x2)
-      if seg.y1 < y and y < seg.y2
+      if seg.y1 <= y and y <= seg.y2
         self
       else
         NoPoints.new
       end
     else
-      if seg.x1 < x and x < seg.x2
+      if seg.x1 <= x and x <= seg.x2
         self
       else
         NoPoints.new
@@ -440,7 +440,7 @@ class Shift < GeometryExpression
   end
 
   def preprocess_prog
-    e.preprocess_prog.shift(dx,dy)
+    Shift.new(dx, dy, e.preprocess_prog)
   end
 
   def shift(dx,dy)
