@@ -264,4 +264,108 @@ if not (s1.x1 == TWO and s1.y1 == THREE and s1.x2 == SIX and s1.y2 == 9)
 end
 
 
+t = Intersect.new(Point.new(2.5,1.5),Intersect.new(LineSegment.new(2.0,1.0,3.0,2.0),Intersect.new(LineSegment.new(0.0,0.0,2.5,1.5),Line.new(1.0,-1.0))))
+t = t.preprocess_prog.eval_prog([])
+puts (t.is_a? Point and t.x == 2.5 and t.y == 1.5)
 
+t = Point.new(1.0,1.0).intersect(LineSegment.new(1.0,1.0,5.0,6.0))
+puts (t.x == ONE and t.y == ONE)
+
+t = Point.new(5.0,7.0).intersect(LineSegment.new(-1.0,2.0,5.0,7.0))
+puts (t.x == FIVE and t.y == SEVEN)
+
+t = Point.new(1.0,1.0).intersectLineSegment(LineSegment.new(1.0,1.0,5.0,6.0))
+puts (t.x == ONE and t.y == ONE)
+
+t = Point.new(5.0,7.0).intersectLineSegment(LineSegment.new(-1.0,2.0,5.0,7.0))
+puts (t.x == FIVE and t.y == SEVEN)
+
+t = LineSegment.new(1.0,1.0,5.0,6.0).intersect(Point.new(1.0,1.0))
+puts (t.x == ONE and t.y == ONE)
+
+t = LineSegment.new(-1.0,2.0,5.0,7.0).intersect(Point.new(5.0,7.0))
+puts (t.x == FIVE and t.y == SEVEN)
+
+t = LineSegment.new(1.0,1.0,5.0,6.0).intersectPoint(Point.new(1.0,1.0))
+puts (t.x == ONE and t.y == ONE)
+
+t = LineSegment.new(-1.0,2.0,5.0,7.0).intersectPoint(Point.new(5.0,7.0))
+puts (t.x == FIVE and t.y == SEVEN)
+
+t = Line.new(5.0,0.0).intersect(LineSegment.new(1.0,5.0,2.0,2.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = Line.new(5.0,0.0).intersect(LineSegment.new(-1.0,-1.0,1.0,5.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = Line.new(5.0,0.0).intersect(LineSegment.new(-1.0,-1.0,1.0,5.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = Line.new(5.0,0.0).intersectLineSegment(LineSegment.new(1.0,5.0,2.0,2.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = Line.new(5.0,0.0).intersectLineSegment(LineSegment.new(-1.0,-1.0,1.0,5.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = Line.new(5.0,0.0).intersectLineSegment(LineSegment.new(-1.0,-1.0,1.0,5.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = LineSegment.new(1.0,5.0,2.0,2.0).intersect(Line.new(5.0,0.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = LineSegment.new(-1.0,-1.0,1.0,5.0).intersect(Line.new(5.0,0.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = LineSegment.new(-1.0,-1.0,1.0,5.0).intersect(Line.new(5.0,0.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = LineSegment.new(1.0,5.0,2.0,2.0).intersectLine(Line.new(5.0,0.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = LineSegment.new(-1.0,-1.0,1.0,5.0).intersectLine(Line.new(5.0,0.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = LineSegment.new(-1.0,-1.0,1.0,5.0).intersectLine(Line.new(5.0,0.0))
+puts (t.x == ONE and t.y == FIVE)
+
+t = VerticalLine.new(3.0).intersect(LineSegment.new(-1.0,-1.0,3.0,3.0))
+puts (t.x == THREE and t.y == THREE)
+
+t = VerticalLine.new(-1.0).intersect(LineSegment.new(-1.0,-1.0,3.0,3.0))
+puts (t.x == -1.0 and t.y == -1.0)
+
+t = VerticalLine.new(3.0).intersectLineSegment(LineSegment.new(-1.0,-1.0,3.0,3.0))
+puts (t.x == THREE and t.y == THREE)
+
+t=VerticalLine.new(-1.0).intersectLineSegment(LineSegment.new(-1.0,-1.0,3.0,3.0))
+puts (t.x == -1.0 and t.y == -1.0)
+
+t=LineSegment.new(-1.0,-1.0,3.0,3.0).intersect(VerticalLine.new(3.0))
+puts (t.x == THREE and t.y == THREE)
+
+t=LineSegment.new(-1.0,-1.0,3.0,3.0).intersect(VerticalLine.new(-1.0))
+puts (t.x == -1.0 and t.y == -1.0)
+
+t=LineSegment.new(-1.0,-1.0,3.0,3.0).intersectVerticalLine(VerticalLine.new(3.0))
+puts (t.x == THREE and t.y == THREE)
+
+t=LineSegment.new(-1.0,-1.0,3.0,3.0).intersectVerticalLine(VerticalLine.new(-1.0))
+puts (t.x == -1.0 and t.y == -1.0)
+
+t=LineSegment.new(5.0,7.0,9.0,9.0).intersect(LineSegment.new(5.0,7.0,6.0,-1.0))
+puts (t.x == FIVE and t.y == SEVEN)
+
+t=LineSegment.new(5.0,2.0,9.0,9.0).intersect(LineSegment.new(-2.0,-1.0,5.0,2.0))
+puts (t.x == FIVE and t.y == TWO)
+
+t=LineSegment.new(2.0,3.0,8.0,4.0).intersect(LineSegment.new(1.0,1.0,8.0,4.0))
+puts (t.x == EIGHT and t.y == FOUR)
+
+t=LineSegment.new(5.0,7.0,9.0,9.0).intersectLineSegment(LineSegment.new(5.0,7.0,6.0,-1.0))
+puts (t.x == FIVE and t.y == SEVEN)
+
+t=LineSegment.new(5.0,2.0,9.0,9.0).intersectLineSegment(LineSegment.new(-2.0,-1.0,5.0,2.0))
+puts (t.x == FIVE and t.y == TWO)
+
+t=LineSegment.new(2.0,3.0,8.0,4.0).intersectLineSegment(LineSegment.new(1.0,1.0,8.0,4.0))
+puts (t.x == EIGHT and t.y == FOUR)
