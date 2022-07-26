@@ -198,15 +198,11 @@ fun eval_prog (e,env) =
       | Shift (dx, dy, e) =>
           case eval_prog (e, env) of
               Point (x, y) => Point (x + dx, y + dy)
-            | NoPoints => e
+            | NoPoints => NoPoints
             | Line (m, b) => Line (m, b + dy - (m * dx))
             | VerticalLine (x) => VerticalLine (x + dx)
             | LineSegment (x1, y1, x2, y2) =>
                   LineSegment (x1 + dx, y1 + dy, x2 + dx, y2 + dy)
-            | Var _ => e
-            | Let _ => e
-            | Intersect _ => e
-            | Shift _ => e
 
 (* preprocessed expression,
 degenerate line segments -> points,
